@@ -14,7 +14,7 @@
     "example-get-list": "node_modules/.bin/babel-node examples/get-list",
     "example-get-card": "node_modules/.bin/babel-node examples/get-card",
     "example-get-member": "node_modules/.bin/babel-node examples/get-member",
-    "start": "node_modules/.bin/babel-node dist/server"
+    "start": "node_modules/.bin/babel-node lib/server"
   },
   "dependencies": {
     "apollo-server": "^2.9.4",
