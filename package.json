@@ -7,6 +7,7 @@
   "repository": "lukehorvat/graphql-trello",
   "main": "dist",
   "scripts": {
+    "lint": "eslint '**/*.js'",
     "prettier": "prettier --write \"**/*.@(yml|json|js|md)\"",
     "prettier:check": "prettier --check \"**/*.@(yml|json|js|md)\"",
     "example-get-board": "node examples/get-board",
@@ -24,6 +25,14 @@
     "p-throttle": "1.1.0"
   },
   "devDependencies": {
+    "eslint": "^6.1.0",
+    "eslint-config-prettier": "^6.0.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-prettier": "^3.0.0",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0",
     "prettier": "^1.18.2"
   },
   "keywords": [
