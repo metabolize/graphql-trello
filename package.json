@@ -7,38 +7,24 @@
   "repository": "lukehorvat/graphql-trello",
   "main": "dist",
   "scripts": {
-    "build": "node_modules/.bin/babel lib -d dist -q",
-    "prebuild": "node_modules/.bin/rimraf dist",
-    "prepublish": "npm run build",
-    "example-get-board": "node_modules/.bin/babel-node examples/get-board",
-    "example-get-list": "node_modules/.bin/babel-node examples/get-list",
-    "example-get-card": "node_modules/.bin/babel-node examples/get-card",
-    "example-get-member": "node_modules/.bin/babel-node examples/get-member",
-    "start": "node_modules/.bin/babel-node lib/server"
+    "example-get-board": "node examples/get-board",
+    "example-get-list": "node examples/get-list",
+    "example-get-card": "node examples/get-card",
+    "example-get-member": "node examples/get-member",
+    "start": "node lib/server"
   },
   "dependencies": {
     "apollo-server": "^2.9.4",
     "bluebird": "3.4.7",
+    "dotenv": "^8.1.0",
     "graphql": "^14.0.2",
     "node-trello": "1.3.0",
     "p-throttle": "1.1.0"
   },
-  "devDependencies": {
-    "babel-cli": "6.22.2",
-    "babel-preset-es2015": "6.22.0",
-    "babel-preset-stage-0": "6.22.0",
-    "dotenv": "^8.1.0",
-    "rimraf": "2.5.4"
-  },
+  "devDependencies": {},
   "keywords": [
     "graphql",
     "trello",
     "api"
-  ],
-  "babel": {
-    "presets": [
-      "es2015",
-      "stage-0"
-    ]
-  }
+  ]
 }
