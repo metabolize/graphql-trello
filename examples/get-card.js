@@ -1,42 +1,51 @@
-import graphqlTrello from '../lib'
+'use strict'
 
-let query = /* GraphQL */ `
-  query($cardId: String!) {
-    getCard(cardId: $cardId) {
-      id
-      name
-      url
-      updatedAt
-      labels {
-        name
-        color
+const gql = require('graphql-tag')
+const queryTrello = require('../lib')
+const credentials = require('../lib/config')
+
+async function main() {
+  const variables = { cardId: process.env.TRELLO_CARD_ID }
+
+  const { getCard: card } = await queryTrello({
+    query: gql`
+      query($cardId: String!) {
+        getCard(cardId: $cardId) {
+          id
+          name
+          url
+          updatedAt
+          labels {
+            name
+            color
+          }
+          members {
+            id
+            username
+            fullName
+            avatarHash
+          }
+          comments {
+            id
+            content
+          }
+        }
       }
-      members {
-        id
-        username
-        fullName
-        avatarHash
-      }
-      comments {
-        id
-        content
-      }
+    `,
+    variables,
+    ...credentials,
+  })
+  console.log(JSON.stringify(card, undefined, 2))
+}
+
+if (require.main === module) {
+  ;(async () => {
+    try {
+      await main()
+      process.exit(0)
+    } catch (e) {
+      console.error(e)
+      process.exit(1)
     }
-  }
-`
-
-graphqlTrello({
-  query,
-  variables: { cardId: process.env.TRELLO_CARD_ID },
-  key: process.env.TRELLO_KEY,
-  token: process.env.TRELLO_TOKEN,
-})
-  .then(data => {
-    let card = data.getCard
-    console.log(JSON.stringify(card, null, 2))
-    process.exit()
-  })
-  .catch(error => {
-    console.error(error)
-    process.exit(1)
-  })
+  })()
+}
