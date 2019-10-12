@@ -1,6 +1,6 @@
-import graphqlTrello from "../lib";
+import graphqlTrello from '../lib'
 
-let query = /* GraphQL */`
+let query = /* GraphQL */ `
   query($boardId: String!) {
     getBoard(boardId: $boardId) {
       id
@@ -38,18 +38,20 @@ let query = /* GraphQL */`
       }
     }
   }
-`;
+`
 
 graphqlTrello({
   query,
   variables: { boardId: process.env.TRELLO_BOARD_ID },
   key: process.env.TRELLO_KEY,
   token: process.env.TRELLO_TOKEN,
-}).then(data => {
-  let board = data.getBoard;
-  console.log(JSON.stringify(board, null, 2));
-  process.exit();
-}).catch(error => {
-  console.error(error);
-  process.exit(1);
-});
+})
+  .then(data => {
+    let board = data.getBoard
+    console.log(JSON.stringify(board, null, 2))
+    process.exit()
+  })
+  .catch(error => {
+    console.error(error)
+    process.exit(1)
+  })

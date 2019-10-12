@@ -7,6 +7,8 @@
   "repository": "lukehorvat/graphql-trello",
   "main": "dist",
   "scripts": {
+    "prettier": "prettier --write \"**/*.@(yml|json|js|md)\"",
+    "prettier:check": "prettier --check \"**/*.@(yml|json|js|md)\"",
     "example-get-board": "node examples/get-board",
     "example-get-list": "node examples/get-list",
     "example-get-card": "node examples/get-card",
@@ -21,7 +23,9 @@
     "node-trello": "1.3.0",
     "p-throttle": "1.1.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "prettier": "^1.18.2"
+  },
   "keywords": [
     "graphql",
     "trello",
