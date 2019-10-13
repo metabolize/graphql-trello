@@ -1,69 +1,90 @@
-# graphql-trello [![NPM version](http://img.shields.io/npm/v/graphql-trello.svg?style=flat-square)](https://www.npmjs.org/package/graphql-trello)
+# trello-apollo
 
-[GraphQL](http://graphql.org) interface to [Trello](https://trello.com)'s API.
+[GraphQL][] interface to the [Trello REST API][]
 
-## Installation
-
-Install the package with NPM:
-
-```bash
-$ npm install graphql-trello
-```
+[graphql]: https://graphql.org/
+[trello rest api]: https://developers.trello.com/reference/
 
 ## Usage
 
-Example:
+There are two ways of using this package:
 
-```javascript
-import graphqlTrello from 'graphql-trello'
+1. As a library for running GraphQL queries locally.
+2. Deploy your own [Apollo-based GraphQL server][apollo-server] e.g. to Heroku.
 
-let query = `
-  query($boardId: String!) {
-    getBoard(boardId: $boardId) {
-      id
-      name
-      lists {
-        id
-        name
-        cards {
+[apollo-server]: https://www.apollographql.com/docs/apollo-server/
+
+### As a library
+
+Install the package:
+
+```sh
+npm install @metabolize/graphql-trello
+```
+
+```js
+// Pass a GraphQL string or use `graphql-tag` to pass in a parsed query.
+const gql = require('graphql-tag')
+const queryTrello = require('../lib')
+
+const credentials = {
+  trelloKey: '...',
+  trelloToken: '...',
+}
+
+const boardID = '...'
+
+async function main() {
+  const variables = { boardId }
+
+  const { getBoard: board } = await queryTrello({
+    query: gql`
+      query($boardId: String!) {
+        getBoard(boardId: $boardId) {
           id
           name
-          comments {
+          lists {
             id
-            content
+            name
+            cards {
+              id
+              name
+              comments {
+                id
+                content
+              }
+            }
+          }
+          members {
+            id
+            username
           }
         }
       }
-      members {
-        id
-        username
-      }
-    }
-  }
-`
+    `,
+    variables,
+    ...credentials,
+  })
 
-graphqlTrello({
-  query,
-  variables: { boardId: 'TRELLO_BOARD_ID' },
-  key: 'TRELLO_KEY',
-  token: 'TRELLO_TOKEN',
-})
-  .then(data => {
-    let board = data.getBoard
-    console.log(board)
-  })
-  .catch(error => {
-    console.error(error)
-  })
+  console.log(JSON.stringify(board, undefined, 2))
+
+  return board
+}
 ```
 
 See the [examples](examples) directory for more!
 
-## Related
+### Deploy your own server
 
-Check out my other Trello packages:
+Fill this in.
 
-- [create-trello-webhook](https://github.com/lukehorvat/create-trello-webhook)
-- [delete-trello-webhook](https://github.com/lukehorvat/delete-trello-webhook)
-- [verify-trello-webhook](https://github.com/lukehorvat/verify-trello-webhook)
-- [get-trello-board](https://github.com/lukehorvat/get-trello-board)
+## Acknowledgements
+
+Adapted from [graphql-trello][] by [Luke Horvat][].
+
+[graphql-trello]: https://github.com/lukehorvat/graphql-trello
+[luke horvat]: https://github.com/lukehorvat
+
+## License
+
+This project is licensed under the MIT License.

@@ -1,11 +1,11 @@
 {
-  "name": "graphql-trello",
+  "name": "trello-apollo",
   "version": "0.0.3",
-  "description": "GraphQL interface to Trello's API.",
-  "author": "Luke Horvat",
+  "description": "GraphQL interface to the Trello REST API",
+  "author": "Metabolize",
   "license": "MIT",
-  "repository": "lukehorvat/graphql-trello",
-  "main": "dist",
+  "repository": "metabolize/trello-apollo",
+  "main": "lib",
   "scripts": {
     "lint": "eslint '**/*.js'",
     "prettier": "prettier --write \"**/*.@(yml|json|js|md)\"",
@@ -38,6 +38,11 @@
   "keywords": [
     "graphql",
     "trello",
-    "api"
+    "api",
+    "apollo"
+  ],
+  "files": [
+    "lib",
+    "example.env"
   ]
 }
